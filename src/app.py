@@ -39,3 +39,16 @@ for track in results["tracks"]:
     })
 
 df = pd.DataFrame(tracks)
+
+
+#store in db
+con = sqlite3.connect('big_brother.db')
+
+cur = con.cursor() #creates the cursor
+
+df.to_sql('top_songs', con, if_exists='replace', index= False)
+
+con.commit()
+con.close() #closing sql connection
+
+
